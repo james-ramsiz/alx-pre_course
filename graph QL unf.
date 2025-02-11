@@ -1,0 +1,51 @@
+# Get products in Electronics category
+query {
+  products(category: "Electronics") {
+    id
+    name
+    price
+    stock
+  }
+}
+
+# Login mutation
+mutation {
+  login(email: "admin@example.com", password: "admin123") {
+    token
+    user {
+      id
+      email
+      role
+    }
+  }
+}
+
+# Add to cart (requires authentication)
+mutation {
+  addToCart(productId: "1", quantity: 2) {
+    items {
+      product {
+        name
+        price
+      }
+      quantity
+    }
+    total
+  }
+}
+
+# Create order
+mutation {
+  createOrder {
+    __typename
+    ... on Order {
+      id
+      total
+      status
+    }
+    ... on Error {
+      message
+      code
+    }
+  }
+}
